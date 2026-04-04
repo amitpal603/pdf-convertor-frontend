@@ -47,7 +47,7 @@ const Profile = () => {
                 <div className="flex items-center justify-between mb-10">
                     <button 
                         onClick={() => navigate(-1)}
-                        className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-white hover:scale-110 active:scale-90 transition-all shadow-2xl"
+                        className="w-12 h-12 rounded-2xl bg-white/10 border border-white/10 flex items-center justify-center text-white hover:scale-110 active:scale-90 transition-all shadow-2xl"
                     >
                         <ChevronLeft className="w-6 h-6" />
                     </button>
@@ -61,12 +61,12 @@ const Profile = () => {
                 <motion.div 
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="bg-white/5 border border-white/5 rounded-[2.5rem] p-8 mb-10 shadow-2xl relative overflow-hidden group backdrop-blur-2xl"
+                    className="bg-white/10 border border-white/5 rounded-[2.5rem] p-8 mb-10 shadow-2xl relative overflow-hidden group backdrop-blur-2xl"
                 >
                     <div className="absolute top-0 right-0 w-32 h-32 bg-red-500/5 blur-3xl -z-10" />
                     
                     <div className="flex items-center gap-6">
-                        <div className="w-24 h-24 rounded-3xl bg-white/5 border border-white/10 p-1 flex items-center justify-center shadow-inner">
+                        <div className="w-24 h-24 rounded-3xl bg-white/10 border border-white/10 p-1 flex items-center justify-center shadow-inner">
                             <div className="w-full h-full rounded-[1.4rem] bg-white/5 flex items-center justify-center overflow-hidden">
                                 <User className="w-12 h-12 text-white/10" />
                             </div>
@@ -79,7 +79,7 @@ const Profile = () => {
                 </motion.div>
 
                 {/* Menu List */}
-                <div className="bg-white/5 border border-white/5 rounded-[2.5rem] p-4 shadow-2xl backdrop-blur-2xl space-y-1">
+                <div className="bg-white/10 border border-white/5 rounded-[2.5rem] p-4 shadow-2xl backdrop-blur-2xl space-y-1">
                     {menuItems.map((item, index) => (
                         <motion.div
                             initial={{ opacity: 0, x: -20 }}
@@ -128,13 +128,13 @@ const Profile = () => {
 
                 {/* Social Icons */}
                 <div className="flex justify-center gap-6 mt-12">
-                    <a href="#" className="p-4 rounded-2xl bg-white/5 border border-white/10 text-gray-500 hover:text-red-500 hover:border-red-500/30 transition-all hover:scale-110 shadow-2xl">
+                    <a href="#" className="p-4 rounded-2xl bg-white/10 border border-white/10 text-gray-500 hover:text-red-500 hover:border-red-500/30 transition-all hover:scale-110 shadow-2xl">
                         <Share2 className="w-5 h-5" />
                     </a>
-                    <a href="#" className="p-4 rounded-2xl bg-white/5 border border-white/10 text-gray-500 hover:text-red-500 hover:border-red-500/30 transition-all hover:scale-110 shadow-2xl">
+                    <a href="#" className="p-4 rounded-2xl bg-white/10 border border-white/10 text-gray-500 hover:text-red-500 hover:border-red-500/30 transition-all hover:scale-110 shadow-2xl">
                         <Camera className="w-5 h-5" />
                     </a>
-                    <a href="#" className="p-4 rounded-2xl bg-white/5 border border-white/10 text-gray-500 hover:text-red-500 hover:border-red-500/30 transition-all hover:scale-110 shadow-2xl">
+                    <a href="#" className="p-4 rounded-2xl bg-white/10 border border-white/10 text-gray-500 hover:text-red-500 hover:border-red-500/30 transition-all hover:scale-110 shadow-2xl">
                         <Play className="w-5 h-5" />
                     </a>
                 </div>
