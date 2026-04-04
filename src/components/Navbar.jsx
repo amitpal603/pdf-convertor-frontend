@@ -114,7 +114,7 @@ const Navbar = () => {
                             >
                                 <X className="w-6 h-6" />
                             </button>
-                            <div className='flex justify-center items-center gap-3 bg-black h-full w-60'>
+                            <div className='flex justify-center items-center gap-3 bg-black h-full w-80 flex-col'>
                             <div className="flex flex-col gap-3 ">
                                 <p className="text-gray-600 text-[10px] uppercase tracking-[0.3em] font-black mb-6 ml-2">Platform Navigation</p>
                                 {navLinks.map((link) => (
