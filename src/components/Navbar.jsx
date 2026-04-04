@@ -105,54 +105,56 @@ const Navbar = () => {
                             animate={{ x: 0 }}
                             exit={{ x: '-100%' }}
                             transition={{ type: 'spring', damping: 30, stiffness: 300 }}
-                            className="fixed top-0 left-0 bottom-0 w-[300px] bg-white/10 backdrop-blur-3xl border-r border-white/10 z-50 md:hidden flex flex-col pt-24 px-8"
+                            className="fixed top-0 left-0 bottom-0 w-[80%] sm:max-w-xs md:max-w-[50%] bg-black h-screen border-r border-white/10 z-50 md:hidden flex flex-col pt-32 px-6"
                         >
                             {/* New Dedicated Close Button */}
                             <button 
                                 onClick={toggleMenu}
-                                className="absolute top-6 right-6 p-4 rounded-2xl bg-black border border-white/10 text-red-500 hover:scale-110 active:scale-90 transition-all shadow-2xl"
+                                className="absolute top-8 right-8 p-4 rounded-2xl bg-white/5 border border-white/10 text-red-500 hover:scale-110 active:scale-90 transition-all shadow-2xl z-20"
                             >
                                 <X className="w-6 h-6" />
                             </button>
-                            <div className='flex justify-center items-center gap-3 bg-black h-full w-80 flex-col mt-40'>
-                            <div className="flex flex-col gap-3 ">
-                                <p className="text-gray-600 text-[10px] uppercase tracking-[0.3em] font-black mb-6 ml-2">Platform Navigation</p>
-                                {navLinks.map((link) => (
-                                    <Link 
-                                        key={link.path}
-                                        to={link.path} 
-                                        onClick={toggleMenu}
-                                        className="flex items-center justify-between text-gray-400 hover:text-white bg-white/5 px-6 py-4 rounded-2xl transition-all border border-white/5 hover:border-white/10 group"
-                                    >
-                                        <div className="flex items-center gap-4">
-                                            <div className="p-3 rounded-xl bg-white/5 group-hover:text-red-500 transition-colors">
-                                                {link.icon || <FileText className="w-5 h-5" />}
-                                            </div>
-                                            <span className="font-black text-xs uppercase tracking-widest">{link.name}</span>
-                                        </div>
-                                        <ChevronRight className="w-4 h-4 opacity-30" />
-                                    </Link>
-                                ))}
-                            </div>
 
-                            <div className="mt-5 mb-10 flex flex-col gap-4 ">
-                                {isAuthenticated ? (
-                                    <button 
-                                        onClick={() => { logout(); toggleMenu(); }}
-                                        className="flex items-center justify-center gap-3 w-full bg-red-500/10 border border-red-500/20 text-red-500 py-6 rounded-[2rem] font-black text-xs uppercase tracking-widest transition-all active:scale-95"
-                                    >
-                                        <LogOut className="w-5 h-5" /> Logout Session
-                                    </button>
-                                ) : (
-                                    <Link 
-                                        to="/login" 
-                                        onClick={toggleMenu}
-                                        className="flex items-center justify-center gap-3 w-full bg-white text-black py-6 rounded-[2rem] font-black text-xs uppercase tracking-widest transition-all active:scale-95 shadow-2xl"
-                                    >
-                                        <LogIn className="w-5 h-5" /> Access Portal
-                                    </Link>
-                                )}
-                            </div>
+                            <div className="flex-1 flex flex-col">
+                                <div className="flex flex-col gap-4">
+                                    <p className="text-gray-500 text-[10px] uppercase tracking-[0.4em] font-black mb-4 ml-2">Platform Navigation</p>
+                                    {navLinks.map((link) => (
+                                        <Link 
+                                            key={link.path}
+                                            to={link.path} 
+                                            onClick={toggleMenu}
+                                            className="flex items-center justify-between text-gray-400 hover:text-white bg-white/5 px-6 py-5 rounded-[2rem] transition-all border border-white/5 hover:border-white/10 group overflow-hidden relative"
+                                        >
+                                            <div className="absolute inset-0 bg-red-500/0 group-hover:bg-red-500/5 transition-colors" />
+                                            <div className="flex items-center gap-4 relative z-10">
+                                                <div className="p-3 rounded-xl bg-white/5 group-hover:bg-red-500 group-hover:text-white transition-all duration-300">
+                                                    {link.icon || <FileText className="w-5 h-5" />}
+                                                </div>
+                                                <span className="font-black text-xs uppercase tracking-[0.2em]">{link.name}</span>
+                                            </div>
+                                            <ChevronRight className="w-4 h-4 opacity-30 group-hover:translate-x-1 group-hover:opacity-100 transition-all" />
+                                        </Link>
+                                    ))}
+                                </div>
+
+                                <div className="mt-auto mb-12 flex flex-col gap-4">
+                                    {isAuthenticated ? (
+                                        <button 
+                                            onClick={() => { logout(); toggleMenu(); }}
+                                            className="flex items-center justify-center gap-3 w-full bg-red-500/5 border border-red-500/10 text-red-400 py-6 rounded-[2.5rem] font-black text-xs uppercase tracking-widest transition-all active:scale-95 hover:bg-red-500 hover:text-white"
+                                        >
+                                            <LogOut className="w-5 h-5" /> Logout Session
+                                        </button>
+                                    ) : (
+                                        <Link 
+                                            to="/login" 
+                                            onClick={toggleMenu}
+                                            className="flex items-center justify-center gap-3 w-full bg-white text-black py-7 rounded-[2.5rem] font-black text-xs uppercase tracking-[0.2em] transition-all active:scale-95 shadow-2xl hover:scale-[1.02]"
+                                        >
+                                            <LogIn className="w-5 h-5" /> Access Portal
+                                        </Link>
+                                    )}
+                                </div>
                             </div>
                         </motion.div>
                     </>
