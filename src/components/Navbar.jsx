@@ -98,14 +98,14 @@ const Navbar = () => {
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
                             onClick={toggleMenu}
-                            className="fixed inset-0 bg-black/80 backdrop-blur-md z-[-1] md:hidden"
+                            className="fixed inset-0 bg-black backdrop-blur-md z-[-1] md:hidden"
                         />
                         <motion.div 
                             initial={{ x: '-100%' }}
                             animate={{ x: 0 }}
                             exit={{ x: '-100%' }}
                             transition={{ type: 'spring', damping: 30, stiffness: 300 }}
-                            className="fixed top-0 left-0 bottom-0 w-[300px] bg-white/60 backdrop-blur-3xl border-r border-white/10 z-50 md:hidden flex flex-col pt-24 px-8"
+                            className="fixed top-0 left-0 bottom-0 w-[300px] bg-white/10 backdrop-blur-3xl border-r border-white/10 z-50 md:hidden flex flex-col pt-24 px-8"
                         >
                             {/* New Dedicated Close Button */}
                             <button 
