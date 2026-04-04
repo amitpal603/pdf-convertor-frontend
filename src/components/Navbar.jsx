@@ -24,9 +24,9 @@ const Navbar = () => {
                     <div className="flex items-center md:hidden">
                         <button 
                             onClick={toggleMenu}
-                            className="text-gray-400 hover:text-white p-3 rounded-2xl bg-white/5 hover:bg-white/10 transition-all focus:outline-none border border-white/5"
+                            className="text-gray-400 hover:text-white p-3 rounded-2xl bg-black border border-white/10 transition-all focus:outline-none"
                         >
-                            {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+                            {isMenuOpen ? <X className="w-6 h-6 text-red-500" /> : <Menu className="w-6 h-6" />}
                         </button>
                     </div>
 
@@ -105,7 +105,7 @@ const Navbar = () => {
                             animate={{ x: 0 }}
                             exit={{ x: '-100%' }}
                             transition={{ type: 'spring', damping: 30, stiffness: 300 }}
-                            className="fixed top-0 left-0 bottom-0 w-[300px] bg-[#0D0D0D] border-r border-white/5 z-50 md:hidden flex flex-col pt-24 px-8"
+                            className="fixed top-0 left-0 bottom-0 w-[300px] bg-white/10 backdrop-blur-3xl border-r border-white/10 z-50 md:hidden flex flex-col pt-24 px-8"
                         >
                             <div className="flex flex-col gap-3">
                                 <p className="text-gray-600 text-[10px] uppercase tracking-[0.3em] font-black mb-6 ml-2">Platform Navigation</p>
@@ -114,10 +114,10 @@ const Navbar = () => {
                                         key={link.path}
                                         to={link.path} 
                                         onClick={toggleMenu}
-                                        className="flex items-center justify-between text-gray-400 hover:text-white hover:bg-white/5 px-5 py-4 rounded-2xl transition-all border border-transparent hover:border-white/5 group"
+                                        className="flex items-center justify-between text-gray-400 hover:text-white bg-white/5 px-6 py-4 rounded-2xl transition-all border border-white/5 hover:border-white/10 group"
                                     >
                                         <div className="flex items-center gap-4">
-                                            <div className="p-2 rounded-lg bg-white/5 group-hover:text-red-500 transition-colors">
+                                            <div className="p-3 rounded-xl bg-white/5 group-hover:text-red-500 transition-colors">
                                                 {link.icon || <FileText className="w-5 h-5" />}
                                             </div>
                                             <span className="font-black text-xs uppercase tracking-widest">{link.name}</span>
