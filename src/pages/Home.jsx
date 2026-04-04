@@ -148,10 +148,7 @@ const tools = [
 
 const Home = () => {
     return (
-        <div className="pt-32 pb-20 px-4 min-h-screen bg-cover bg-fixed bg-center relative" style={{ backgroundImage: `url(${bgPattern})` }}>
-            {/* Background Overlay for better readability */}
-            <div className="absolute inset-0 bg-white/40 pointer-events-none" />
-
+        <div className="pt-32 pb-20 px-4 min-h-screen">
             {/* Hero Section */}
             <div className="max-w-7xl mx-auto text-center mb-20 relative z-10">
                 <motion.div 
