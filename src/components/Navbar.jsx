@@ -33,11 +33,9 @@ const Navbar = () => {
                     {/* Logo */}
                     <div className="flex items-center flex-1 justify-center md:justify-start">
                         <Link to="/" className="flex items-center gap-2 group text-white font-bold text-2xl uppercase tracking-tighter">
-                            <div className="flex items-center gap-1 group-hover:scale-105 transition-transform duration-300">
-                                <span className="text-white">PDF</span>
-                                <Heart className="w-6 h-6 text-red-500 fill-red-500" />
+                            <div className="flex items-center gap-2 group-hover:scale-105 transition-transform duration-300">
                                 <span className="bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
-                                    Convertor
+                                    PDF Convertor
                                 </span>
                             </div>
                         </Link>
