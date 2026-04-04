@@ -17,16 +17,16 @@ const Navbar = () => {
     ];
 
     return (
-        <nav className="fixed top-0 left-0 w-full z-50 bg-[#0D0D0D]/15 backdrop-blur-2xl border-b border-white/5 transition-all duration-300">
+        <nav className="fixed top-0 left-0 w-full z-50 bg-[#0D0D0D] backdrop-blur-2xl border-b border-white/5 transition-all duration-300">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between h-24">
                     {/* Hamburger Menu Icon (Mobile) */}
-                    <div className="flex items-center md:hidden">
+                    <div className={`flex items-center md:hidden ${isMenuOpen ? 'opacity-0 scale-90 pointer-events-none' : 'opacity-100 scale-100'}`}>
                         <button 
                             onClick={toggleMenu}
-                            className="text-gray-400 hover:text-white p-3 rounded-2xl bg-black border border-white/10 transition-all focus:outline-none"
+                            className="text-gray-400 hover:text-white p-3 rounded-2xl bg-black border border-white/10 transition-all duration-300 focus:outline-none"
                         >
-                            {isMenuOpen ? <X className="w-6 h-6 text-red-500" /> : <Menu className="w-6 h-6" />}
+                            <Menu className="w-6 h-6" />
                         </button>
                     </div>
 
@@ -62,7 +62,7 @@ const Navbar = () => {
                     </div>
 
                     {/* Right Side Icons */}
-                    <div className="flex items-center gap-4 flex-1 justify-end">
+                    <div className={`flex items-center gap-4 flex-1 justify-end transition-all duration-300 ${isMenuOpen ? 'opacity-0 scale-90 pointer-events-none' : 'opacity-100 scale-100'}`}>
                         <button className="hidden sm:flex text-gray-500 hover:text-white p-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 transition-all">
                             <Grid className="w-5 h-5" />
                         </button>
@@ -107,6 +107,14 @@ const Navbar = () => {
                             transition={{ type: 'spring', damping: 30, stiffness: 300 }}
                             className="fixed top-0 left-0 bottom-0 w-[300px] bg-white/10 backdrop-blur-3xl border-r border-white/10 z-50 md:hidden flex flex-col pt-24 px-8"
                         >
+                            {/* New Dedicated Close Button */}
+                            <button 
+                                onClick={toggleMenu}
+                                className="absolute top-6 right-6 p-4 rounded-2xl bg-black border border-white/10 text-red-500 hover:scale-110 active:scale-90 transition-all shadow-2xl"
+                            >
+                                <X className="w-6 h-6" />
+                            </button>
+
                             <div className="flex flex-col gap-3">
                                 <p className="text-gray-600 text-[10px] uppercase tracking-[0.3em] font-black mb-6 ml-2">Platform Navigation</p>
                                 {navLinks.map((link) => (
