@@ -105,7 +105,7 @@ const Navbar = () => {
                             animate={{ x: 0 }}
                             exit={{ x: '-100%' }}
                             transition={{ type: 'spring', damping: 30, stiffness: 300 }}
-                            className="fixed top-0 left-0 bottom-0 w-[300px] bg-white/10 backdrop-blur-3xl border-r border-white/10 z-50 md:hidden flex flex-col pt-24 px-8"
+                            className="fixed top-0 left-0 bottom-0 w-[300px] bg-white/60 backdrop-blur-3xl border-r border-white/10 z-50 md:hidden flex flex-col pt-24 px-8"
                         >
                             {/* New Dedicated Close Button */}
                             <button 
@@ -115,7 +115,7 @@ const Navbar = () => {
                                 <X className="w-6 h-6" />
                             </button>
 
-                            <div className="flex flex-col gap-3 bg-black">
+                            <div className="flex flex-col gap-3">
                                 <p className="text-gray-600 text-[10px] uppercase tracking-[0.3em] font-black mb-6 ml-2">Platform Navigation</p>
                                 {navLinks.map((link) => (
                                     <Link 
