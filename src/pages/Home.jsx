@@ -155,7 +155,7 @@ const Home = () => {
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.5 }}
-                    className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-red-500/5 border border-red-500/10 text-red-600 text-sm font-bold mb-8 shadow-sm"
+                    className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-red-500/5 border border-red-500/10 text-red-500 text-sm font-bold mb-8 shadow-sm"
                 >
                     <Heart className="w-4 h-4 text-red-500 fill-red-500" />
                     Every tool you need to work with PDFs in one place
@@ -165,7 +165,7 @@ const Home = () => {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 0.1 }}
-                    className="text-4xl md:text-6xl font-black tracking-tight text-gray-900 mb-6 drop-shadow-sm"
+                    className="text-4xl md:text-6xl font-black tracking-tight text-white mb-6 drop-shadow-sm"
                 >
                     Every tool you need to use PDFs, <br />
                     <span className="text-[#E5322D]">at your fingertips.</span>
@@ -175,7 +175,7 @@ const Home = () => {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 0.2 }}
-                    className="max-w-2xl mx-auto text-gray-700 text-lg mb-10 font-semibold leading-relaxed"
+                    className="max-w-2xl mx-auto text-gray-400 text-lg mb-10 font-semibold leading-relaxed"
                 >
                     All the tools you need to efficiently enhance your digital documents while keeping your data safe and secure.
                 </motion.p>
@@ -194,33 +194,33 @@ const Home = () => {
                         >
                             <Link 
                                 to={tool.path}
-                                className={`group relative flex flex-col h-full bg-white/90 backdrop-blur-sm border border-gray-100 p-8 rounded-[2rem] hover:bg-white hover:border-red-500/30 transition-all duration-300 overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_50px_rgba(229,50,45,0.08)] ${tool.status === 'Coming Soon' ? 'cursor-not-allowed opacity-90' : ''}`}
+                                className={`group relative flex flex-col h-full bg-white/5 backdrop-blur-xl border border-white/5 p-8 rounded-[2rem] hover:bg-white/10 hover:border-red-500/30 transition-all duration-300 overflow-hidden shadow-2xl ${tool.status === 'Coming Soon' ? 'cursor-not-allowed opacity-60' : ''}`}
                             >
                                 {/* Tool Status Badge */}
                                 {tool.status === 'Coming Soon' && (
-                                    <span className="absolute top-4 right-4 text-[10px] uppercase font-bold tracking-tighter bg-gray-50 text-gray-400 px-2 py-1 rounded-md border border-gray-100">
+                                    <span className="absolute top-4 right-4 text-[10px] uppercase font-bold tracking-tighter bg-white/5 text-gray-400 px-2 py-1 rounded-md border border-white/5">
                                         Soon
                                     </span>
                                 )}
                                 {tool.status === 'Functional' && (
-                                    <span className="absolute top-4 right-4 text-[10px] uppercase font-bold tracking-tighter bg-red-500/10 text-[#E5322D] px-2 py-1 rounded-md border border-red-500/20 opacity-0 group-hover:opacity-100 transition-opacity">
+                                    <span className="absolute top-4 right-4 text-[10px] uppercase font-bold tracking-tighter bg-red-500/10 text-red-500 px-2 py-1 rounded-md border border-red-500/20">
                                         Ready
                                     </span>
                                 )}
 
-                                <div className="mb-6 p-4 bg-gray-50 rounded-2xl w-fit group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
+                                <div className="mb-6 p-4 bg-white/5 rounded-2xl w-fit group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
                                     {tool.icon}
                                 </div>
                                 
-                                <h3 className="text-gray-900 text-xl font-black mb-3 group-hover:text-[#E5322D] transition-colors">
+                                <h3 className="text-white text-xl font-black mb-3 group-hover:text-red-500 transition-colors">
                                     {tool.title}
                                 </h3>
                                 
-                                <p className="text-gray-600 text-sm font-medium leading-relaxed mb-4">
+                                <p className="text-gray-400 text-sm font-medium leading-relaxed mb-4">
                                     {tool.desc}
                                 </p>
 
-                                <div className="mt-auto pt-4 flex items-center gap-2 text-[#E5322D] text-sm font-bold opacity-0 group-hover:opacity-100 transition-all translate-x-[-10px] group-hover:translate-x-0">
+                                <div className="mt-auto pt-4 flex items-center gap-2 text-red-500 text-sm font-bold opacity-0 group-hover:opacity-100 transition-all translate-x-[-10px] group-hover:translate-x-0">
                                     {tool.status === 'Functional' ? 'Get Started' : 'Learn More'} 
                                     <ArrowRight className="w-4 h-4" />
                                 </div>
@@ -234,12 +234,12 @@ const Home = () => {
             </div>
 
             {/* Bottom Section */}
-            <div className="max-w-7xl mx-auto mt-32 text-center border-t border-gray-200/50 pt-20 relative z-10">
-                <div className="inline-flex items-center gap-3 bg-white/60 backdrop-blur-sm px-6 py-3 rounded-2xl border border-gray-100 shadow-sm mb-8">
-                    <ShieldCheck className="w-6 h-6 text-green-600" />
-                    <span className="text-gray-900 font-black">Your data is safe with us</span>
+            <div className="max-w-7xl mx-auto mt-32 text-center border-t border-white/5 pt-20 relative z-10">
+                <div className="inline-flex items-center gap-3 bg-white/5 backdrop-blur-xl px-6 py-3 rounded-2xl border border-white/5 shadow-sm mb-8">
+                    <ShieldCheck className="w-6 h-6 text-green-500" />
+                    <span className="text-white font-black uppercase tracking-widest text-xs">Your data is safe with us</span>
                 </div>
-                <p className="max-w-xl mx-auto text-gray-600 text-sm font-bold">
+                <p className="max-w-xl mx-auto text-gray-400 text-sm font-bold leading-relaxed">
                     We process your files securely using industrial-grade encryption. <br />
                     All files are automatically deleted after processing.
                 </p>
@@ -247,6 +247,7 @@ const Home = () => {
         </div>
     );
 };
+
 
 export default Home;
 
