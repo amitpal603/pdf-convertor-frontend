@@ -61,7 +61,7 @@ const Profile = () => {
                 <motion.div 
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="bg-white/10 border border-white/5 rounded-[2.5rem] p-8 mb-10 shadow-2xl relative overflow-hidden group backdrop-blur-2xl"
+                    className="bg-white/10 border border-white/10 rounded-[2.5rem] p-8 mb-10 shadow-2xl relative overflow-hidden group backdrop-blur-2xl"
                 >
                     <div className="absolute top-0 right-0 w-32 h-32 bg-red-500/5 blur-3xl -z-10" />
                     
@@ -79,7 +79,7 @@ const Profile = () => {
                 </motion.div>
 
                 {/* Menu List */}
-                <div className="bg-white/10 border border-white/5 rounded-[2.5rem] p-4 shadow-2xl backdrop-blur-2xl space-y-1">
+                <div className="bg-white/10 border border-white/10 rounded-[2.5rem] p-4 shadow-2xl backdrop-blur-2xl space-y-1">
                     {menuItems.map((item, index) => (
                         <motion.div
                             initial={{ opacity: 0, x: -20 }}

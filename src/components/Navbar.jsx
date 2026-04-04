@@ -115,7 +115,7 @@ const Navbar = () => {
                                 <X className="w-6 h-6" />
                             </button>
 
-                            <div className="flex flex-col gap-3">
+                            <div className="flex flex-col gap-3 bg-black">
                                 <p className="text-gray-600 text-[10px] uppercase tracking-[0.3em] font-black mb-6 ml-2">Platform Navigation</p>
                                 {navLinks.map((link) => (
                                     <Link 
@@ -135,7 +135,7 @@ const Navbar = () => {
                                 ))}
                             </div>
 
-                            <div className="mt-auto mb-10 flex flex-col gap-4">
+                            <div className="mt-5 mb-10 flex flex-col gap-4 ">
                                 {isAuthenticated ? (
                                     <button 
                                         onClick={() => { logout(); toggleMenu(); }}
