@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { FileUp, FileCheck, Loader2, Download, Trash2 } from 'lucide-react';
+import { FileUp, FileCheck, Loader2, Download, Trash2, History } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import api from '../services/api';
 import Loading from '../components/Loading';
 
 const PdfToImage = () => {
+    const navigate = useNavigate();
     const [file, setFile] = useState(null);
     const [loading, setLoading] = useState(false);
     const [result, setResult] = useState(null);
@@ -96,12 +98,23 @@ const PdfToImage = () => {
                                         <p className="text-gray-500 font-bold uppercase tracking-widest text-xs">{result.images.length} Pages Processed</p>
                                     </div>
                                 </div>
-                                <button 
-                                    onClick={() => setResult(null)}
-                                    className="p-3 bg-white/5 text-gray-400 hover:text-red-500 rounded-xl border border-white/10 transition-all hover:scale-110 active:scale-90"
-                                >
-                                    <Trash2 className="w-6 h-6" />
-                                </button>
+                                <div className="flex items-center gap-3">
+                                    <button 
+                                        onClick={() => navigate('/dashboard')}
+                                        className="p-3 bg-red-600/10 border border-red-600/20 text-red-500 rounded-xl transition-all hover:scale-110 active:scale-90 flex items-center gap-2 group"
+                                        title="View History"
+                                    >
+                                        <History className="w-6 h-6 group-hover:rotate-[-20deg] transition-transform" />
+                                        <span className="text-xs font-black uppercase tracking-widest hidden sm:inline">History</span>
+                                    </button>
+                                    <button 
+                                        onClick={() => setResult(null)}
+                                        className="p-3 bg-white/5 text-gray-400 hover:text-red-500 rounded-xl border border-white/10 transition-all hover:scale-110 active:scale-90"
+                                        title="Start Over"
+                                    >
+                                        <Trash2 className="w-6 h-6" />
+                                    </button>
+                                </div>
                             </div>
 
                             <div className="grid grid-cols-2 sm:grid-cols-3 gap-6">

@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { FileUp, FileCheck, Loader2, Download, Trash2, LayoutGrid, X } from 'lucide-react';
+import { FileUp, FileCheck, Loader2, Download, Trash2, LayoutGrid, X, History } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import api from '../services/api';
 import Loading from '../components/Loading';
 
 const ImageToPdf = () => {
+    const navigate = useNavigate();
     const [files, setFiles] = useState([]);
     const [loading, setLoading] = useState(false);
     const [result, setResult] = useState(null);
@@ -119,8 +121,14 @@ const ImageToPdf = () => {
                                     <Download className="w-7 h-7" /> Download PDF
                                 </a>
                                 <button 
+                                    onClick={() => navigate('/dashboard')}
+                                    className="flex items-center justify-center gap-4 bg-red-600/10 border border-red-600/20 text-red-500 px-14 py-5 rounded-2xl font-black text-xl hover:scale-[1.02] active:scale-95 transition-all shadow-2xl shadow-red-500/5 group"
+                                >
+                                    <History className="w-7 h-7 group-hover:rotate-[-20deg] transition-transform" /> View History
+                                </button>
+                                <button 
                                     onClick={() => setResult(null)}
-                                    className="px-14 py-5 bg-white/5 border border-white/10 text-gray-400 rounded-2xl hover:text-red-500 transition-all uppercase text-sm font-black tracking-widest shadow-sm hover:scale-105"
+                                    className="px-14 py-5 bg-white/5 border border-white/10 text-gray-400 rounded-2xl hover:text-white transition-all uppercase text-sm font-black tracking-widest shadow-sm hover:scale-105"
                                 >
                                     Start Over
                                 </button>

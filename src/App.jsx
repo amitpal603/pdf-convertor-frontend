@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import PdfToImage from './pages/PdfToImage';
 import ImageToPdf from './pages/ImageToPdf';
 import Profile from './pages/Profile';
+import Dashboard from './pages/Dashboard';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import { AuthProvider, useAuth } from './context/AuthContext';
@@ -32,7 +33,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
-            <Route path="/dashboard" element={<ProtectedRoute><div className="pt-40 text-center text-4xl font-bold uppercase tracking-widest text-indigo-500">Dashboard Coming Soon</div></ProtectedRoute>} />
+            <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
           </Routes>
         </Layout>
       </Router>

@@ -38,7 +38,7 @@ const Profile = () => {
     };
     
     const menuItems = [
-        { icon: <FileText className="w-5 h-5 text-red-500" />, label: 'My Conversions', link: '/history' },
+        { icon: <FileText className="w-5 h-5 text-red-500" />, label: 'My Conversions', link: '/dashboard' },
         { icon: <User className="w-5 h-5 text-indigo-500" />, label: 'Account Settings', link: '/settings' },
         { icon: <Sparkles className="w-5 h-5 text-amber-500" />, label: 'Pro Plan / Upgrade', link: '/pro' },
         { icon: <HelpCircle className="w-5 h-5 text-green-500" />, label: 'Help Center', link: '/support' },
