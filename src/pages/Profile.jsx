@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { 
     ChevronLeft, 
@@ -18,17 +18,22 @@ import {
 } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import Loading from '../components/Loading';
 
 const Profile = () => {
     const navigate = useNavigate();
     const { user, logout } = useAuth();
+    const [loading, setLoading] = useState(false);
 
     const handleLogout = async () => {
+        setLoading(true);
         try {
             await logout();
             navigate('/login');
         } catch (err) {
             console.error('Logout failed:', err);
+        } finally {
+            setLoading(false);
         }
     };
     
@@ -42,6 +47,7 @@ const Profile = () => {
 
     return (
         <div className="pt-32 pb-20 px-4 min-h-screen">
+            {loading && <Loading message="Signing out..." />}
             <div className="max-w-md mx-auto relative">
                 {/* Header */}
                 <div className="flex items-center justify-between mb-10">

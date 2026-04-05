@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { FileUp, FileCheck, Loader2, Download, Trash2 } from 'lucide-react';
 import api from '../services/api';
+import Loading from '../components/Loading';
 
 const PdfToImage = () => {
     const [file, setFile] = useState(null);
@@ -35,6 +36,7 @@ const PdfToImage = () => {
 
     return (
         <div className="pt-32 pb-20 px-4 min-h-screen">
+            {loading && <Loading message="Converting PDF to Images..." />}
             <div className="max-w-4xl mx-auto">
                 <div className="text-center mb-12">
                     <h2 className="text-5xl font-black text-white uppercase mb-4 tracking-tight drop-shadow-sm">

@@ -9,11 +9,12 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { Navigate } from 'react-router-dom';
+import Loading from './components/Loading';
 
 const ProtectedRoute = ({ children }) => {
   const { isAuthenticated, loading } = useAuth();
   
-  if (loading) return <div className="min-h-screen flex items-center justify-center bg-black text-white">Loading...</div>;
+  if (loading) return <Loading message="Authenticating..." />;
   if (!isAuthenticated) return <Navigate to="/login" />;
   
   return children;
