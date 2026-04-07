@@ -3,7 +3,7 @@ import axios from 'axios';
 let accessToken = localStorage.getItem('accessToken') || null;
 
 const api = axios.create({
-    baseURL: "https://pdf-convertor-wbn9.onrender.com/api" || 'http://localhost:3000/api',
+    baseURL: "https://pdf-convertor-2-gv7l.onrender.com/api" || 'http://localhost:3000/api',
     withCredentials: true,
     headers: {
         'Content-Type': 'application/json',
