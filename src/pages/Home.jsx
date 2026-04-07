@@ -1,152 +1,68 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { 
     ArrowRight, FileImage, FileStack, ShieldCheck, Zap, 
     Presentation, Table, Edit3, Image as ImageIcon, 
     PenTool, Stamp, RotateCw, Code, Unlock, Lock, 
     Layout, FileType, Wrench, ListOrdered, Scan, 
-    Languages, Columns, SquareX, Heart
+    Languages, Columns, SquareX, Heart, Loader2
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import bgPattern from '../assets/bg-pattern.png';
-
-const tools = [
-    {
-        title: "PowerPoint to PDF",
-        desc: "Make PPT and PPTX slideshows easy to view by converting them to PDF.",
-        icon: <Presentation className="w-8 h-8 text-orange-500" />,
-        path: "#",
-        status: "Coming Soon"
-    },
-    {
-        title: "Excel to PDF",
-        desc: "Make EXCEL spreadsheets easy to read by converting them to PDF.",
-        icon: <Table className="w-8 h-8 text-green-500" />,
-        path: "#",
-        status: "Coming Soon"
-    },
-    {
-        title: "Edit PDF",
-        desc: "Add text, images, shapes or freehand annotations to a PDF document.",
-        icon: <Edit3 className="w-8 h-8 text-purple-500" />,
-        path: "#",
-        status: "Coming Soon"
-    },
-    {
-        title: "PDF to JPG",
-        desc: "Convert each PDF page into a JPG or extract all images contained in a PDF.",
-        icon: <ImageIcon className="w-8 h-8 text-yellow-600" />,
-        path: "/convert/pdf-to-image",
-        status: "Functional"
-    },
-    {
-        title: "JPG to PDF",
-        desc: "Convert JPG images to PDF in seconds. Easily adjust orientation and margins.",
-        icon: <FileImage className="w-8 h-8 text-yellow-600" />,
-        path: "/convert/image-to-pdf",
-        status: "Functional"
-    },
-    {
-        title: "Sign PDF",
-        desc: "Sign yourself or request electronic signatures from others.",
-        icon: <PenTool className="w-8 h-8 text-blue-500" />,
-        path: "#",
-        status: "Coming Soon"
-    },
-    {
-        title: "Watermark",
-        desc: "Stamp an image or text over your PDF in seconds. Choose position and transparency.",
-        icon: <Stamp className="w-8 h-8 text-purple-400" />,
-        path: "#",
-        status: "Coming Soon"
-    },
-    {
-        title: "Rotate PDF",
-        desc: "Rotate your PDFs the way you need them. You can even rotate multiple PDFs at once!",
-        icon: <RotateCw className="w-8 h-8 text-pink-500" />,
-        path: "#",
-        status: "Coming Soon"
-    },
-    {
-        title: "HTML to PDF",
-        desc: "Convert webpages in HTML to PDF. Copy and paste the URL and convert it with a click.",
-        icon: <Code className="w-8 h-8 text-yellow-700" />,
-        path: "#",
-        status: "Coming Soon"
-    },
-    {
-        title: "Unlock PDF",
-        desc: "Remove PDF password security, giving you the freedom to use your PDFs as you want.",
-        icon: <Unlock className="w-8 h-8 text-blue-400" />,
-        path: "#",
-        status: "Coming Soon"
-    },
-    {
-        title: "Protect PDF",
-        desc: "Protect PDF files with a password. Encrypt PDF documents to prevent unauthorized access.",
-        icon: <Lock className="w-8 h-8 text-blue-600" />,
-        path: "#",
-        status: "Coming Soon"
-    },
-    {
-        title: "Organize PDF",
-        desc: "Sort pages of your PDF file however you like. Delete or add PDF pages at your convenience.",
-        icon: <Layout className="w-8 h-8 text-orange-600" />,
-        path: "#",
-        status: "Coming Soon"
-    },
-    {
-        title: "PDF to PDF/A",
-        desc: "Transform your PDF to PDF/A, the ISO-standardized version of PDF for long-term archiving.",
-        icon: <FileType className="w-8 h-8 text-blue-500" />,
-        path: "#",
-        status: "Coming Soon"
-    },
-    {
-        title: "Repair PDF",
-        desc: "Repair a damaged PDF and recover data from corrupt PDF. Fix PDF files with our Repair tool.",
-        icon: <Wrench className="w-8 h-8 text-green-600" />,
-        path: "#",
-        status: "Coming Soon"
-    },
-    {
-        title: "Page numbers",
-        desc: "Add page numbers into PDFs with ease. Choose your positions, dimensions, typography.",
-        icon: <ListOrdered className="w-8 h-8 text-purple-600" />,
-        path: "#",
-        status: "Coming Soon"
-    },
-    {
-        title: "Scan to PDF",
-        desc: "Capture document scans from your mobile device and send them instantly to your browser.",
-        icon: <Scan className="w-8 h-8 text-orange-500" />,
-        path: "#",
-        status: "Coming Soon"
-    },
-    {
-        title: "OCR PDF",
-        desc: "Easily convert scanned PDF into searchable and selectable documents.",
-        icon: <Languages className="w-8 h-8 text-green-500" />,
-        path: "#",
-        status: "Coming Soon"
-    },
-    {
-        title: "Compare PDF",
-        desc: "Show a side-by-side document comparison and easily spot changes between different file versions.",
-        icon: <Columns className="w-8 h-8 text-blue-500" />,
-        path: "#",
-        status: "Coming Soon"
-    },
-    {
-        title: "Redact PDF",
-        desc: "Redact text and graphics to permanently remove sensitive information from a PDF.",
-        icon: <SquareX className="w-8 h-8 text-red-500" />,
-        path: "#",
-        status: "Coming Soon"
-    },
-];
+import api from '../services/api';
+import Loading from '../components/Loading';
 
 const Home = () => {
+    const [services, setServices] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    const getIconComponent = (iconName) => {
+        const icons = {
+            Presentation: <Presentation className="w-8 h-8 text-orange-500" />,
+            Table: <Table className="w-8 h-8 text-green-500" />,
+            Edit3: <Edit3 className="w-8 h-8 text-purple-500" />,
+            ImageIcon: <ImageIcon className="w-8 h-8 text-yellow-600" />,
+            FileImage: <FileImage className="w-8 h-8 text-yellow-600" />,
+            PenTool: <PenTool className="w-8 h-8 text-blue-500" />,
+            Stamp: <Stamp className="w-8 h-8 text-purple-400" />,
+            RotateCw: <RotateCw className="w-8 h-8 text-pink-500" />,
+            Code: <Code className="w-8 h-8 text-yellow-700" />,
+            Unlock: <Unlock className="w-8 h-8 text-blue-400" />,
+            Lock: <Lock className="w-8 h-8 text-blue-600" />,
+            Layout: <Layout className="w-8 h-8 text-orange-600" />,
+            FileType: <FileType className="w-8 h-8 text-blue-500" />,
+            Wrench: <Wrench className="w-8 h-8 text-green-600" />,
+            ListOrdered: <ListOrdered className="w-8 h-8 text-purple-600" />,
+            Scan: <Scan className="w-8 h-8 text-orange-500" />,
+            Languages: <Languages className="w-8 h-8 text-green-500" />,
+            Columns: <Columns className="w-8 h-8 text-blue-500" />,
+            SquareX: <SquareX className="w-8 h-8 text-red-500" />,
+            FileStack: <FileStack className="w-8 h-8 text-blue-500" />,
+            Zap: <Zap className="w-8 h-8 text-yellow-500" />
+        };
+        return icons[iconName] || <Zap className="w-8 h-8 text-blue-500" />;
+    };
+
+    const fetchServices = async () => {
+        try {
+            const res = await api.get('/services');
+            if (res.data.success) {
+                setServices(res.data.data);
+            }
+        } catch (err) {
+            console.error('Error fetching services:', err);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        fetchServices();
+    }, []);
+
+    if (loading) {
+        return <Loading message="Syncing Tools..." />;
+    }
+
     return (
         <div className="pt-32 pb-20 px-4 min-h-screen">
             {/* Hero Section */}
@@ -184,9 +100,9 @@ const Home = () => {
             {/* Tools Grid Section */}
             <div className="max-w-7xl mx-auto px-4 md:px-8 relative z-10">
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                    {tools.map((tool, i) => (
+                    {services.map((tool, i) => (
                         <motion.div
-                            key={i}
+                            key={tool._id || i}
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.4, delay: i * 0.05 }}
@@ -209,7 +125,7 @@ const Home = () => {
                                 )}
 
                                 <div className="mb-6 p-4 bg-white/5 rounded-2xl w-fit group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
-                                    {tool.icon}
+                                    {getIconComponent(tool.icon)}
                                 </div>
                                 
                                 <h3 className="text-white text-xl font-black mb-3 group-hover:text-blue-500 transition-colors">
@@ -217,7 +133,7 @@ const Home = () => {
                                 </h3>
                                 
                                 <p className="text-gray-400 text-sm font-medium leading-relaxed mb-4">
-                                    {tool.desc}
+                                    {tool.description || tool.desc}
                                 </p>
 
                                 <div className="mt-auto pt-4 flex items-center gap-2 text-blue-500 text-sm font-bold opacity-0 group-hover:opacity-100 transition-all translate-x-[-10px] group-hover:translate-x-0">
@@ -248,7 +164,7 @@ const Home = () => {
     );
 };
 
-
 export default Home;
+
 
 

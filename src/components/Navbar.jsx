@@ -1,20 +1,41 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { FileText, Image, LayoutDashboard, LogIn, LogOut, User, Menu, X, Grid, Heart, ChevronRight } from 'lucide-react';
+import { FileText, Image, LayoutDashboard, LogIn, LogOut, User, Menu, X, Grid, Heart, ChevronRight, Shield, PlusCircle } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const Navbar = () => {
-    const { isAuthenticated, logout } = useAuth();
+    const { isAuthenticated, user, logout } = useAuth();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
-    const navLinks = [
-        { name: 'PDF to Image', path: '/convert/pdf-to-image' },
-        { name: 'Image to PDF', path: '/convert/image-to-pdf' },
-        { name: 'Dashboard', path: '/dashboard', icon: <LayoutDashboard className="w-4 h-4" /> },
-    ];
+    const getNavLinks = () => {
+        const links = [];
+
+        if (user?.role === 'admin') {
+            links.push(
+                { name: 'Admin Dashboard', path: '/admin/dashboard', icon: <LayoutDashboard className="w-4 h-4" /> },
+                { name: 'Add Service', path: '/admin/services/add', icon: <PlusCircle className="w-4 h-4 text-red-500" /> }
+            );
+        } else {
+            // Standard User/Guest Links
+            links.push(
+                { name: 'PDF to Image', path: '/convert/pdf-to-image' },
+                { name: 'Image to PDF', path: '/convert/image-to-pdf' }
+            );
+            
+            if (isAuthenticated) {
+                links.push({ name: 'Dashboard', path: '/dashboard', icon: <LayoutDashboard className="w-4 h-4" /> });
+            }
+        }
+        
+        return links;
+    };
+
+    const navLinks = getNavLinks();
+
+
 
     return (
         <nav className="fixed top-0 left-0 w-full z-50 bg-[#0D0D0D] backdrop-blur-2xl border-b border-white/5 transition-all duration-300">
