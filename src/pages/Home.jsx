@@ -155,9 +155,9 @@ const Home = () => {
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.5 }}
-                    className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-red-500/5 border border-red-500/10 text-red-500 text-sm font-bold mb-8 shadow-sm"
+                    className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/5 border border-blue-500/10 text-blue-500 text-sm font-bold mb-8 shadow-sm"
                 >
-                    <Heart className="w-4 h-4 text-red-500 fill-red-500" />
+                    <Heart className="w-4 h-4 text-blue-500 fill-blue-500" />
                     Every tool you need to work with PDFs in one place
                 </motion.div>
                 
@@ -168,7 +168,7 @@ const Home = () => {
                     className="text-4xl md:text-6xl font-black tracking-tight text-white mb-6 drop-shadow-sm"
                 >
                     Every tool you need to use PDFs, <br />
-                    <span className="text-[#E5322D]">at your fingertips.</span>
+                    <span className="text-blue-500">at your fingertips.</span>
                 </motion.h1>
                 
                 <motion.p 
@@ -212,7 +212,7 @@ const Home = () => {
                                     {tool.icon}
                                 </div>
                                 
-                                <h3 className="text-white text-xl font-black mb-3 group-hover:text-red-500 transition-colors">
+                                <h3 className="text-white text-xl font-black mb-3 group-hover:text-blue-500 transition-colors">
                                     {tool.title}
                                 </h3>
                                 
@@ -220,7 +220,7 @@ const Home = () => {
                                     {tool.desc}
                                 </p>
 
-                                <div className="mt-auto pt-4 flex items-center gap-2 text-red-500 text-sm font-bold opacity-0 group-hover:opacity-100 transition-all translate-x-[-10px] group-hover:translate-x-0">
+                                <div className="mt-auto pt-4 flex items-center gap-2 text-blue-500 text-sm font-bold opacity-0 group-hover:opacity-100 transition-all translate-x-[-10px] group-hover:translate-x-0">
                                     {tool.status === 'Functional' ? 'Get Started' : 'Learn More'} 
                                     <ArrowRight className="w-4 h-4" />
                                 </div>
