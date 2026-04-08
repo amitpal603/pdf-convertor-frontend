@@ -18,12 +18,18 @@ import {
 import { useNavigate } from 'react-router-dom';
 import api from '../services/api';
 import Loading from '../components/Loading';
+import ConfirmModal from '../components/ConfirmModal';
 
 const AdminDashboard = () => {
     const navigate = useNavigate();
     const [services, setServices] = useState([]);
     const [loading, setLoading] = useState(true);
     const [searchTerm, setSearchTerm] = useState('');
+
+    // Delete Modal State
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [itemToDelete, setItemToDelete] = useState(null);
+    const [isDeleting, setIsDeleting] = useState(false);
 
     const fetchServices = async () => {
         setLoading(true);
@@ -43,15 +49,26 @@ const AdminDashboard = () => {
         fetchServices();
     }, []);
 
-    const handleDelete = async (id, title) => {
-        if (!window.confirm(`Are you sure you want to delete "${title}"? This cannot be undone.`)) return;
+    const handleDelete = (id, title) => {
+        setItemToDelete({ id, title });
+        setIsModalOpen(true);
+    };
+
+    const confirmDelete = async () => {
+        if (!itemToDelete) return;
         
+        setIsDeleting(true);
         try {
+            const { id } = itemToDelete;
             await api.delete(`/services/${id}`);
             setServices(services.filter(s => s._id !== id));
+            setIsModalOpen(false);
+            setItemToDelete(null);
         } catch (err) {
             console.error('Failed to delete service:', err);
             alert('Error deleting service');
+        } finally {
+            setIsDeleting(false);
         }
     };
 
@@ -63,6 +80,15 @@ const AdminDashboard = () => {
     return (
         <div className="pt-32 pb-20 px-4 min-h-screen bg-[#050505] text-white">
             {loading && <Loading message="Syncing Services..." />}
+
+            <ConfirmModal 
+                isOpen={isModalOpen}
+                title="Decommission Service"
+                message={`Are you sure you want to permanently delete the "${itemToDelete?.title}" service? This action cannot be undone.`}
+                onConfirm={confirmDelete}
+                onClose={() => setIsModalOpen(false)}
+                loading={isDeleting}
+            />
 
             <div className="max-w-6xl mx-auto">
                 {/* Header Section */}

@@ -19,6 +19,7 @@ import { useNavigate } from 'react-router-dom';
 import api from '../services/api';
 import Loading from '../components/Loading';
 import { useAuth } from '../context/AuthContext';
+import ConfirmModal from '../components/ConfirmModal';
 
 const Dashboard = () => {
     const navigate = useNavigate();
@@ -30,6 +31,11 @@ const Dashboard = () => {
         'pdf-to-image': []
     });
     const [searchTerm, setSearchTerm] = useState('');
+    
+    // Delete Modal State
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [itemToDelete, setItemToDelete] = useState(null);
+    const [isDeleting, setIsDeleting] = useState(false);
 
     const fetchHistory = async () => {
         setLoading(true);
@@ -54,10 +60,20 @@ const Dashboard = () => {
         fetchHistory();
     }, []);
 
-    const handleDelete = async (id, type) => {
-        if (!window.confirm('Are you sure you want to delete this record?')) return;
+    const handleDelete = (id, type) => {
+        const item = history[type].find(i => i._id === id);
+        const name = type === 'image-to-pdf' ? item.originalName : item.originalPdfName;
+        
+        setItemToDelete({ id, type, name });
+        setIsModalOpen(true);
+    };
 
+    const confirmDelete = async () => {
+        if (!itemToDelete) return;
+        
+        setIsDeleting(true);
         try {
+            const { id, type } = itemToDelete;
             const endpoint = type === 'image-to-pdf' 
                 ? `/pdf/delete/${id}` 
                 : `/pdf/pdf-to-image/delete/${id}`;
@@ -69,9 +85,14 @@ const Dashboard = () => {
                 ...prev,
                 [type]: prev[type].filter(item => item._id !== id)
             }));
+            
+            setIsModalOpen(false);
+            setItemToDelete(null);
         } catch (err) {
             console.error('Delete failed:', err);
             alert('Failed to delete record');
+        } finally {
+            setIsDeleting(false);
         }
     };
 
@@ -108,6 +129,15 @@ const Dashboard = () => {
     return (
         <div className="pt-32 pb-20 px-4 min-h-screen bg-[#050505] text-white">
             {loading && <Loading message="Syncing your history..." />}
+
+            <ConfirmModal 
+                isOpen={isModalOpen}
+                title="Delete Record"
+                message={`Are you sure you want to delete "${itemToDelete?.name}"? This action cannot be undone.`}
+                onConfirm={confirmDelete}
+                onClose={() => setIsModalOpen(false)}
+                loading={isDeleting}
+            />
 
             <div className="max-w-5xl mx-auto">
                 {/* Header Section */}
