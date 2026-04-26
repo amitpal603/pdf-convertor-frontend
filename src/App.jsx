@@ -40,8 +40,8 @@ function App() {
         <Layout>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/convert/pdf-to-image" element={<ProtectedRoute><PdfToImage /></ProtectedRoute>} />
-            <Route path="/convert/image-to-pdf" element={<ProtectedRoute><ImageToPdf /></ProtectedRoute>} />
+            <Route path="/convert/pdf-to-image" element={<PdfToImage />} />
+            <Route path="/convert/image-to-pdf" element={<ImageToPdf />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />

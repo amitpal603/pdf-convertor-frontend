@@ -21,6 +21,10 @@ const ImageToPdf = () => {
         setFiles(files.filter((_, i) => i !== index));
     };
 
+    const clearAll = () => {
+        setFiles([]);
+    };
+
     const handleUpload = async () => {
         if (files.length === 0) return;
         setLoading(true);
@@ -70,6 +74,17 @@ const ImageToPdf = () => {
                                     <p className="text-gray-500 font-bold mt-2">Accepts JPG, PNG, WEBP</p>
                                 </div>
                             </div>
+
+                            {files.length > 0 && (
+                                <div className="w-full max-w-3xl mb-4 flex justify-end">
+                                    <button 
+                                        onClick={clearAll}
+                                        className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-gray-500 hover:text-red-500 transition-colors"
+                                    >
+                                        <Trash2 className="w-4 h-4" /> Clear All Assets
+                                    </button>
+                                </div>
+                            )}
 
                             {files.length > 0 && (
                                 <div className="w-full max-w-3xl grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-4 mb-10">

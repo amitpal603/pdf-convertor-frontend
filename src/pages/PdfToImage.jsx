@@ -128,14 +128,21 @@ const PdfToImage = () => {
                                     >
                                         <img src={img.imageUrl} alt={`Page ${img.pageNumber}`} className="w-full h-full object-cover transition-transform group-hover:scale-105" />
                                         <div className="absolute inset-0 bg-red-600/90 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-all backdrop-blur-sm">
-                                            <a 
-                                                href={`${import.meta.env.VITE_API_URL || 'https://pdf-convertor-wbn9.onrender.com/api'}/pdf/pdf-to-image/download/${result._id}/${img.pageNumber}`}
-                                                target="_blank"
-                                                rel="noreferrer"
+                                            <button 
+                                                onClick={async () => {
+                                                    try {
+                                                        const res = await api.get(`/pdf/pdf-to-image/download/${result._id}/${img.pageNumber}`);
+                                                        if (res.data.success) {
+                                                            window.open(res.data.downloadUrl, '_blank');
+                                                        }
+                                                    } catch (err) {
+                                                        alert('Failed to download image');
+                                                    }
+                                                }}
                                                 className="bg-white text-red-600 p-4 rounded-full hover:scale-110 active:scale-90 transition-all shadow-[0_20px_50px_rgba(0,0,0,0.3)]"
                                             >
                                                 <Download className="w-6 h-6" />
-                                            </a>
+                                            </button>
                                         </div>
                                         <div className="absolute top-3 left-3 px-3 py-1.5 bg-black/60 backdrop-blur-md rounded-xl text-[10px] text-white font-black tracking-widest border border-white/10">
                                             PAGE {img.pageNumber}
