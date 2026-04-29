@@ -71,7 +71,7 @@ const ImageToPdf = () => {
                                         <FileUp className="w-10 h-10 text-red-500" />
                                     </div>
                                     <p className="text-white font-black text-xl">Click or drag images</p>
-                                    <p className="text-gray-500 font-bold mt-2">Accepts JPG, PNG, WEBP</p>
+                                    <p className="text-gray-500 font-bold mt-2">Accepts JPG, PNG</p>
                                 </div>
                             </div>
 

@@ -4,6 +4,10 @@ import { FileUp, FileCheck, Loader2, Download, Trash2, History } from 'lucide-re
 import { useNavigate } from 'react-router-dom';
 import api from '../services/api';
 import Loading from '../components/Loading';
+import * as pdfjsLib from 'pdfjs-dist';
+
+// Configure PDF.js worker
+pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.mjs`;
 
 const PdfToImage = () => {
     const navigate = useNavigate();
@@ -20,17 +24,45 @@ const PdfToImage = () => {
     const handleUpload = async () => {
         if (!file) return;
         setLoading(true);
-        const formData = new FormData();
-        formData.append('pdf', file);
 
         try {
+            // 1. Convert PDF to images locally using pdf.js
+            const arrayBuffer = await file.arrayBuffer();
+            const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+            const numPages = pdf.numPages;
+            const imageFiles = [];
+
+            for (let i = 1; i <= numPages; i++) {
+                const page = await pdf.getPage(i);
+                const viewport = page.getViewport({ scale: 2.0 }); // High resolution
+
+                const canvas = document.createElement('canvas');
+                const context = canvas.getContext('2d');
+                canvas.height = viewport.height;
+                canvas.width = viewport.width;
+
+                await page.render({
+                    canvasContext: context,
+                    viewport: viewport
+                }).promise;
+
+                // Convert canvas to blob
+                const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/jpeg', 0.9));
+                imageFiles.push(new File([blob], `page-${i}.jpg`, { type: 'image/jpeg' }));
+            }
+
+            // 2. Upload images to backend
+            const formData = new FormData();
+            formData.append('originalPdfName', file.name);
+            imageFiles.forEach(img => formData.append('images', img));
+
             const res = await api.post('/pdf/convert/pdf-to-image', formData, {
                 headers: { 'Content-Type': 'multipart/form-data' }
             });
             setResult(res.data.data);
         } catch (err) {
             console.error(err);
-            alert('Conversion failed');
+            alert('Conversion failed: ' + (err.message || 'Unknown error'));
         } finally {
             setLoading(false);
         }
